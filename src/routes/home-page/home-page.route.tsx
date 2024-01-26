@@ -26,6 +26,7 @@ const Homepage = () => {
         const data = await response.json();
         const gameNights = (data.gameNightArray as Array<GameNightData>).map(gameNight => ({...gameNight, date: new Date(gameNight.date)}));
         setGameNights(gameNights);
+        setIsLoading(false);
       }
       catch(error) {
         console.log('Unable to get Game Nights', error);
@@ -39,10 +40,8 @@ const Homepage = () => {
     useEffect(() => {
       const playerStats = calculatePlayerStats(gameNights);
       setPlayerStats(playerStats);
-      setIsLoading(false);
     }, [gameNights]);
 
-    
     return(
         <>
           {
