@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './App.tsx'
 
-import './index.css'
+import './index.scss'
 import '../node_modules/bootstrap/scss/bootstrap.scss'
 
 
