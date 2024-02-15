@@ -8,5 +8,6 @@ export type PlayerStatsData = {
         "wins": number,
         "hosts": number,
         "currentStreak": number,
-        "bestStreak": number
+        "bestStreak": number,
+        "currentWinner": boolean
 }

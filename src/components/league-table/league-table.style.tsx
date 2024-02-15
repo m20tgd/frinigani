@@ -1,4 +1,8 @@
-#leagueTable {
+import styled from "styled-components";
+
+import CrownSvg from '../../assets/crown-icon.svg?react';
+
+export const LeagueTableDiv = styled.div`
     tbody{
         :nth-child(1) {
             td{
@@ -19,4 +23,10 @@
     th {
         font-size: 0.9rem;
     }
-}
+`
+
+export const CrownIcon = styled(CrownSvg)`
+    height: 1rem;
+    margin-top: 0.25rem;
+    float: right;
+`
