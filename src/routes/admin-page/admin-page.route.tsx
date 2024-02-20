@@ -1,11 +1,13 @@
+import AdminForm from "../../components/admin-form/admin-form.component"
 
 
 const AdminPage = () => {
 
     return(
-        <>
-            <h1>This is the admin page</h1>
-        </>
+        <div className="container">
+            <h1 className="my-3">Admin</h1>
+            <AdminForm />
+        </div>
     )
 }
 
