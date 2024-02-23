@@ -1,4 +1,14 @@
-import { FC } from "react";
+import { FC, FormEvent } from "react";
+import $ from "jquery";
+
+type GameNightDataObject = {
+    date: string,
+    game: string,
+    food: string,
+    host: string,
+    players: Array<string>,
+    winners: Array<string>
+}
 
 type AdminFormProps = {
 
@@ -6,89 +16,108 @@ type AdminFormProps = {
 
 const AdminForm: FC<AdminFormProps> = () => {
 
+    console.log('RENDER')
+
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        // console.log(inputValues);
+        const date = $('#dateInput').val() as string;
+        const game = $('#gameInput').val() as string;
+        const food = $('#foodInput').val() as string;
+        const host = $('#hostInput :checked').val() as string;
+        const players = $('#playersInput :checked')
+            .map((_, checkbox) => $(checkbox).val())
+            .toArray() as Array<string>;
+        const winners = $('#winnersInput :checked')
+            .map((_, checkbox) => $(checkbox).val())
+            .toArray() as Array<string>;
+        const dataToSend: GameNightDataObject = { date, game, food, host, players, winners};
+        console.log(dataToSend);
+    }
+
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <div className="form-floating mb-3">
-                <input type="date" className="form-control form-control-sm" id="dateInput" placeholder="-" required/>
+                <input type="date" className="form-control form-control-sm" id="dateInput" required/>
                 <label htmlFor="dateInput">Date</label>
             </div>
             <div className="form-floating mb-3">
-                <input type="text" className="form-control form-control-sm" id="gameInput" placeholder="-" required/>
+                <input type="text" className="form-control form-control-sm" id="gameInput" required/>
                 <label htmlFor="gameInput">Game</label>
             </div>
             <div className="form-floating mb-3">
-                <input type="text" className="form-control" id="foodInput" placeholder="-" required/>
+                <input type="text" className="form-control" id="foodInput" required/>
                 <label htmlFor="foodInput">Food</label>
             </div>
 
-            <fieldset className='mb-3'>
+            <fieldset className='mb-3' id="hostInput">
                 <legend>Host</legend>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions"/>
-                    <label className="form-check-label" htmlFor="inlineRadio1">Anthony</label>
+                    <input className="form-check-input" type="radio" name="host" value="Anthony"/>
+                    <label className="form-check-label">Anthony</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions"/>
-                    <label className="form-check-label" htmlFor="inlineRadio1">David</label>
+                    <input className="form-check-input" type="radio" name="host" value="David"/>
+                    <label className="form-check-label">David</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions"/>
-                    <label className="form-check-label" htmlFor="inlineRadio1">Esme</label>
+                    <input className="form-check-input" type="radio" name="host" value="Esme"/>
+                    <label className="form-check-label">Esme</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions"/>
-                    <label className="form-check-label" htmlFor="inlineRadio1">Ethan</label>
+                    <input className="form-check-input" type="radio" name="host" value="Ethan"/>
+                    <label className="form-check-label">Ethan</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions"/>
-                    <label className="form-check-label" htmlFor="inlineRadio1">Tom</label>
+                    <input className="form-check-input" type="radio" name="host" value="Tom"/>
+                    <label className="form-check-label">Tom</label>
                 </div>
             </fieldset>
 
-            <fieldset className='mb-3'>
+            <fieldset className='mb-3' id="playersInput">
                 <legend>Players</legend>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="checkbox" />
-                    <label className="form-check-label" htmlFor="inlineCheckbox1">Anthony</label>
+                    <input className="form-check-input" type="checkbox" value="Anthony"/>
+                    <label className="form-check-label">Anthony</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="checkbox" />
-                    <label className="form-check-label" htmlFor="inlineCheckbox2">David</label>
+                    <input className="form-check-input" type="checkbox" value="David"/>
+                    <label className="form-check-label">David</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="checkbox" />
-                    <label className="form-check-label" htmlFor="inlineCheckbox2">Esme</label>
+                    <input className="form-check-input" type="checkbox" value="Esme"/>
+                    <label className="form-check-label">Esme</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="checkbox" />
-                    <label className="form-check-label" htmlFor="inlineCheckbox2">Ethan</label>
+                    <input className="form-check-input" type="checkbox" value="Ethan"/>
+                    <label className="form-check-label">Ethan</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="checkbox" />
-                    <label className="form-check-label" htmlFor="inlineCheckbox2">Tom</label>
+                    <input className="form-check-input" type="checkbox" value="Tom"/>
+                    <label className="form-check-label">Tom</label>
                 </div>
             </fieldset>
 
-            <fieldset className='mb-3'>
+            <fieldset className='mb-3' id="winnersInput">
                 <legend>Winners</legend>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="checkbox" />
+                    <input className="form-check-input" type="checkbox" value="Anthony"/>
                     <label className="form-check-label" htmlFor="inlineCheckbox1">Anthony</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="checkbox" />
+                    <input className="form-check-input" type="checkbox" value="David"/>
                     <label className="form-check-label" htmlFor="inlineCheckbox2">David</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="checkbox" />
+                    <input className="form-check-input" type="checkbox" value="Esme"/>
                     <label className="form-check-label" htmlFor="inlineCheckbox2">Esme</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="checkbox" />
+                    <input className="form-check-input" type="checkbox" value="Ethan"/>
                     <label className="form-check-label" htmlFor="inlineCheckbox2">Ethan</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="checkbox" />
+                    <input className="form-check-input" type="checkbox" value="Tom"/>
                     <label className="form-check-label" htmlFor="inlineCheckbox2">Tom</label>
                 </div>
             </fieldset>
