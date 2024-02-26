@@ -1,7 +1,6 @@
 import { FC, FormEvent } from "react";
 import $ from "jquery";
 import GameNightData from "../../types/game-night-data.type";
-import { addGameNight } from "../../firebase/firebase";
 
 // type GameNightDataObject = {
 //     date: string,
