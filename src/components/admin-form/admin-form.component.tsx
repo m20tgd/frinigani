@@ -1,14 +1,16 @@
 import { FC, FormEvent } from "react";
 import $ from "jquery";
+import GameNightData from "../../types/game-night-data.type";
+import { addGameNight } from "../../firebase/firebase";
 
-type GameNightDataObject = {
-    date: string,
-    game: string,
-    food: string,
-    host: string,
-    players: Array<string>,
-    winners: Array<string>
-}
+// type GameNightDataObject = {
+//     date: string,
+//     game: string,
+//     food: string,
+//     host: string,
+//     players: Array<string>,
+//     winners: Array<string>
+// }
 
 type AdminFormProps = {
 
@@ -18,10 +20,10 @@ const AdminForm: FC<AdminFormProps> = () => {
 
     console.log('RENDER')
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         // console.log(inputValues);
-        const date = $('#dateInput').val() as string;
+        const date = new Date($('#dateInput').val() as string);
         const game = $('#gameInput').val() as string;
         const food = $('#foodInput').val() as string;
         const host = $('#hostInput :checked').val() as string;
@@ -31,8 +33,12 @@ const AdminForm: FC<AdminFormProps> = () => {
         const winners = $('#winnersInput :checked')
             .map((_, checkbox) => $(checkbox).val())
             .toArray() as Array<string>;
-        const dataToSend: GameNightDataObject = { date, game, food, host, players, winners};
+        const dataToSend: GameNightData = { date, game, food, host, players, winners};
         console.log(dataToSend);
+        await fetch('/.netlify/functions/firebase_add_game_night', {
+            method: 'POST',
+            body: JSON.stringify(dataToSend)
+        });
     }
 
     return (
