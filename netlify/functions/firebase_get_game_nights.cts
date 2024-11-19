@@ -33,8 +33,6 @@ exports.handler = async () => {
           if (a.date > b.date) return 1;
           return -1;
       });
-    // return undefined;
-    // return new Response({gameNightArray: JSON.stringify(gameNightArray)}) ;
         return {
           statusCode: 200,
           body: JSON.stringify({gameNightArray})
@@ -45,31 +43,4 @@ exports.handler = async () => {
   }
 
 }
-
-// export default async () => {
-//     try{
-//       const collectionRef = collection(db, 'game-nights');
-//       const dbQuery = query(collectionRef);
-//       console.time('query')
-//       // const querySnapshot = await getDocs(dbQuery);
-//       // const gameNightArray = querySnapshot.docs
-//       //   .map(docSnapshop =>  docSnapshop.data())
-//       //   .map(gameNightDoc => ({ ...gameNightDoc, date: gameNightDoc.date.toDate()}))
-//       //   .sort((a, b) => {
-//       //       if (a.date > b.date) return 1;
-//       //       return -1;
-//       //   });
-//       console.timeEnd('query');
-//       return undefined;
-//       // return new Response(JSON.stringify(gameNightArray)) ;
-//       //   return {
-//       //     statusCode: 200,
-//       //     body: JSON.stringify({gameNightArray})
-//       // }
-//     }
-//     catch(error){
-//       return new Response('Fail', { status: 400})
-//     }
-
-// }
 

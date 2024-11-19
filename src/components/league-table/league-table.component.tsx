@@ -3,8 +3,6 @@ import { FC } from 'react';
 import { PlayerStatsCollection, PlayerStatsData } from '../../types/player-stats-data.type';
 import { values } from 'lodash';
 
-import { LeagueTableDiv } from './league-table.style';
-
 import LeagueTableRow from './league-table-row.component';
 
 
@@ -31,8 +29,6 @@ const LeagueTable: FC<LeagueTableProps> = ({playerStats}) => {
     sortStats(statsArray);
 
     return (
-        <LeagueTableDiv className='mt-2'>
-            <h1>League Table</h1>
             <table className='table' id='leagueTable'>
                 <thead>
                     <tr>
@@ -47,7 +43,6 @@ const LeagueTable: FC<LeagueTableProps> = ({playerStats}) => {
                     {statsArray.map(stats => <LeagueTableRow key={stats.name} stats={stats} />)}
                 </tbody>
             </table>
-        </LeagueTableDiv>
     )
 
 }
