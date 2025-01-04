@@ -1,14 +1,15 @@
+import { GUEST_SUFFIX } from "../consts/player.const";
 import GameNightData from "../types/game-night-data.type";
 import { PlayerStatsCollection, PlayerStatsData } from "../types/player-stats-data.type";
 
-import { uniq } from 'lodash';
+import { endsWith, uniq } from 'lodash';
 
 const calculatePlayerStats = (gameNights: Array<GameNightData>, yearFilter: string): PlayerStatsCollection => {
 
     //---Create Stats Object for Each Player
     const playerStats: PlayerStatsCollection = {};
     const players = getAllPlayers(gameNights);
-    players.forEach(player => playerStats[player] =generatePlayerStatsObject(player));
+    players.forEach(player => playerStats[player] = generatePlayerStatsObject(player));
     console.log(playerStats)
     //---Get Year Filter as a Number
     const numberYearFilter = Number(yearFilter);
@@ -24,6 +25,8 @@ const calculatePlayerStats = (gameNights: Array<GameNightData>, yearFilter: stri
             const numberOfGameNights = array.length;
             players.forEach(player => {
                 const stats = playerStats[player];
+                //Prevent undefined stats for non-group players
+                if (!stats) return;
                 //Increment number of games played by player
                 stats.plays++;
                 // Check if player is a winner
@@ -49,7 +52,10 @@ const calculatePlayerStats = (gameNights: Array<GameNightData>, yearFilter: stri
 
 const getAllPlayers = (gameNights: Array<GameNightData>): Array<string> => {
     const allPlayers: Array<string> = gameNights.map(gameNight => gameNight.players).flat();
-    return uniq(allPlayers);
+    return uniq(allPlayers).filter(player => {
+        const isGuestPlayer = endsWith(player, GUEST_SUFFIX);
+        return !isGuestPlayer;
+    });
 }
 
 export const getActiveYears = (gameNights: Array<GameNightData>): Array<number> => {
