@@ -14,6 +14,10 @@ const Base64Tool = () => {
     const [ base64Input, setBase64Input ] = useState('A');
 
     useEffect(() => {
+      document.title = "Base 64 Tool";
+    }, []);
+
+    useEffect(() => {
         setBase64Output(transformDecimalIntoBase64(decimalInput))
     }, [decimalInput])
 

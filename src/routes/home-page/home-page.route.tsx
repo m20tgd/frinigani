@@ -30,6 +30,10 @@ const Homepage = () => {
         console.log('Unable to get Game Nights', error);
       }
     }
+
+    useEffect(() => {
+      document.title = "Friday Night Game Night";
+    }, []);
   
     useEffect(() => {
       getGameNights();
