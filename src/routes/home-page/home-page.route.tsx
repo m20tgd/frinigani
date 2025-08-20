@@ -36,6 +36,7 @@ const Homepage = () => {
     }, []);
   
     useEffect(() => {
+      console.log('Getting Game Nights');
       getGameNights();
     }, [])
 

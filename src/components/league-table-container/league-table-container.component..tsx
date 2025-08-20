@@ -27,11 +27,12 @@ const LeagueTableContainer: FC<LeagueTableContainerProps> = ({gameNights}) => {
                 <select 
                     className='form-select form-select-sm w-25 ms-3'
                     onChange={selectChange}
+                    defaultValue={activeYears.length > 0 ? String(first(activeYears)) : 'all'}
                 >
                     <option value="all">All Time</option>
                     { 
                         activeYears.map((year, index) => (
-                            <option selected={index===0}>
+                            <option key={index} value={year}>
                                 {year}
                             </option>
                         ))
