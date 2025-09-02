@@ -41,11 +41,11 @@ const BroadbandMonitor = () => {
 
     return (
         <div className="container">
-            <div className="row mt-3">
-                <div className="col">
+            <div className="row mt-3 ms-5">
+                <div className="col-xl-4 col-md-6 col-12">
                     <h1>Broadband Speed</h1>
                 </div>
-                <div className="col">
+                <div className="col-xl-6 col-md-6 col-12 offset-xl-2">
                     <div className="input-group input-group-sm pt-3 pe-4">
                         <select className="form-select" defaultValue={"day"} onChange={onTimeRangeChange}>
                             <option value="day">Day</option>
