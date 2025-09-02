@@ -4,7 +4,6 @@ import GameNightData from '../../types/game-night-data.type';
 import calculatePlayerStats, { getActiveYears } from '../../utils/playerStatCalculator.util';
 import { LeagueTableContainerDiv } from './league-table-container.style';
 import { first, reverse } from 'lodash';
-import { useNavigate } from 'react-router-dom';
 
 
 interface LeagueTableContainerProps {
@@ -19,12 +18,10 @@ const LeagueTableContainer: FC<LeagueTableContainerProps> = ({gameNights}) => {
 
     const selectChange = (event: ChangeEvent<HTMLSelectElement>) => setYearFilter(String(event.target.value));
 
-    const navigate = useNavigate();
-
     return (
         <LeagueTableContainerDiv className='mt-2'>
             <div className='d-flex align-items-center'>
-                <h1 onClick={() => navigate('/broadband')}>
+                <h1>
                     League Table
                 </h1>
                 <select 

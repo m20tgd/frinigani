@@ -19,9 +19,7 @@ const Homepage = () => {
       try {
         const response = await fetch('/.netlify/functions/firebase_get_game_nights');
         if (response.status !== 200) throw Error(response.statusText);
-        console.log('Response', response)
         const data = await response.json();
-        console.log('DATA', data);
         const gameNights = (data.gameNightArray as Array<GameNightData>).map(gameNight => ({...gameNight, date: new Date(gameNight.date)}));
         setGameNights(gameNights);
         setIsLoading(false);
