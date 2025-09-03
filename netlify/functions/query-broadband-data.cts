@@ -40,6 +40,7 @@ exports.handler = async (event) => {
         WHERE time >= '${startDateString}'
         AND time < '${endDateString}'
         GROUP BY 1
+        ORDER BY time ASC
     `;
 
 
